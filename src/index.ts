@@ -3,33 +3,48 @@ import { buildMatrix, RobotUniquePaths } from './matrix/robotExercise'
 import { swap } from './numbers/swapIntegears'
 import { MaximumGold } from './matrix/maximunGold'
 import { longestPalindrome2 } from './strings/longestPalindromeInAString'
+import {
+	maxSubstring,
+	productOfElementsExeptSelf,
+	productOfEle,
+} from './listas/maxProductSubstring'
+import { rotateArray } from './listas/RotateArray'
 
-type T = string | number | Array<number>
+// const arr = [2, 3, -2, -5, 6, -1, 4]
+const arr = [1, 2, 3, 4]
+// const arr = [-1, 1, 0, -3, 3]
+// console.log(productOfEle(arr))
+// console.log(productOfElementsExeptSelf(arr))
+// console.log(maxSubstring(arr))
+console.log(rotateArray(arr, 10))
 
-class Main {
-	run(): T {
-		// // return longestSubsString(fullString, 3)
-		// const unsortedArray: number[] = [8, 5, 3, 9, 11, 2]
-		// const mergeSort: MergeSort = new MergeSort()
-		// return mergeSort.run(unsortedArray)
-		// // const burble: BurbleSort = new BurbleSort(unsortedArray)
-		// // return burble.run()
-		// const robot: RobotUniquePaths = new RobotUniquePaths()
-		// return robot.uniquePaths(3, 4)
+// type T = string | number | Array<number>
 
-		// return swap(123)
-		const grid: number[][] = [
-			[0, 6, 0],
-			[5, 8, 7],
-			[0, 9, 0],
-		]
-		const maxGold = new MaximumGold()
-		return maxGold.maxGold(grid)
-	}
-}
+// class Main {
+// 	run(): T {
+// 		// // return longestSubsString(fullString, 3)
+// 		// const unsortedArray: number[] = [8, 5, 3, 9, 11, 2]
+// 		// const mergeSort: MergeSort = new MergeSort()
+// 		// return mergeSort.run(unsortedArray)
+// 		// // const burble: BurbleSort = new BurbleSort(unsortedArray)
+// 		// // return burble.run()
+// 		// const robot: RobotUniquePaths = new RobotUniquePaths()
+// 		// return robot.uniquePaths(3, 4)
 
-const inputString = 'babad'
-console.log(longestPalindrome2(inputString)) // Output: "bab" or "aba"
+// 		// return swap(123)
+// 		// const grid: number[][] = [
+// 		// 	[0, 6, 0],
+// 		// 	[5, 8, 7],
+// 		// 	[0, 9, 0],
+// 		// ]
+// 		// const maxGold = new MaximumGold()
+// 		// return maxGold.maxGold(grid)
+
+// 	}
+// }
+
+// const inputString = 'babad'
+// console.log(longestPalindrome2(inputString)) // Output: "bab" or "aba"
 
 // const array = [7, -2, 3, 1, 2, 20, -5]
 // const arr2 = [0, 2, 1]

@@ -6,7 +6,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"compile": "tsc",
 		"start": "ts-node src/index.ts",
-		"list": "ts-node src/listas/palindrome.ts"
+		"list": "ts-node src/listas/palindrome.ts",
+		"slide": "ts-node src/SlideWindows/midianSlidingWindows.ts"
 	},
 	"keywords": [],
 	"author": "",
