@@ -9,14 +9,19 @@ import {
 	productOfEle,
 } from './listas/maxProductSubstring'
 import { rotateArray } from './listas/RotateArray'
+import { longestPrefix } from './strings/longestPrefix'
+
+const arrStr = ['cluster', 'clue', 'clutch', 'club', 'clumsy']
+
+console.log(longestPrefix(arrStr))
 
 // const arr = [2, 3, -2, -5, 6, -1, 4]
-const arr = [1, 2, 3, 4]
+// const arr = [1, 2, 3, 4]
 // const arr = [-1, 1, 0, -3, 3]
 // console.log(productOfEle(arr))
 // console.log(productOfElementsExeptSelf(arr))
 // console.log(maxSubstring(arr))
-console.log(rotateArray(arr, 10))
+// console.log(rotateArray(arr, 10))
 
 // type T = string | number | Array<number>
 
