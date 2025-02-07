@@ -208,3 +208,109 @@ const slidingWindowMedian = new SlidingWindowMedian()
 const nums = [1, -1, 3, 5, -1, -3, 6, 2, -4]
 
 console.log(slidingWindowMedian.slidingWindowMedian(nums, 4)) // [2, 2, 3, 1, 1, 2, 2]
+
+function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
+	if (nums1.length > nums2.length) {
+		;[nums1, nums2] = [nums2, nums1] // Ensure nums1 is the smaller array
+	}
+
+	const m = nums1.length
+	const n = nums2.length
+	let left = 0,
+		right = m
+
+	while (left <= right) {
+		let partitionX = Math.floor((left + right) / 2)
+		let partitionY = Math.floor((m + n + 1) / 2) - partitionX
+
+		let maxLeftX =
+			partitionX === 0 ? Number.NEGATIVE_INFINITY : nums1[partitionX - 1]
+		let minRightX =
+			partitionX === m ? Number.POSITIVE_INFINITY : nums1[partitionX]
+
+		let maxLeftY =
+			partitionY === 0 ? Number.NEGATIVE_INFINITY : nums2[partitionY - 1]
+		let minRightY =
+			partitionY === n ? Number.POSITIVE_INFINITY : nums2[partitionY]
+
+		if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+			// Found the correct partition
+			if ((m + n) % 2 === 0) {
+				return (
+					(Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2
+				)
+			} else {
+				return Math.max(maxLeftX, maxLeftY)
+			}
+		} else if (maxLeftX > minRightY) {
+			right = partitionX - 1 // Move left
+		} else {
+			left = partitionX + 1 // Move right
+		}
+	}
+
+	throw new Error('Input arrays are not sorted')
+}
+
+const findMidian = (nums1: number[], nums2: number[]): number => {
+	// combinar y organizar nuevamente los arrays
+	const mergedAndSortedArrays = [...nums1, ...nums2].sort((a, b) => a - b)
+	// buscar el indice medio del array
+	const middleIndex = Math.ceil((mergedAndSortedArrays.length - 1) / 2)
+
+	// si el middleIndex es impar => devolver el valor en ese indice
+	// sino devolver (mergedAndSortedArrays[middleIndex] + mergedAndSortedArrays[middleIndex + 1])/2
+
+	if (middleIndex % 2 !== 0) return mergedAndSortedArrays[middleIndex]
+	return (
+		(mergedAndSortedArrays[middleIndex] +
+			mergedAndSortedArrays[middleIndex + 1]) /
+		2
+	)
+}
+
+function findMedian(arr: number[]): number {
+	const n = arr.length
+	if (n === 0) throw new Error('Array is empty')
+
+	const mid = Math.floor(n / 2)
+	quickSelect(arr, 0, n - 1, mid)
+
+	if (n % 2 === 0) {
+		const leftMid = quickSelect(arr, 0, n - 1, mid - 1)
+		return (arr[mid] + leftMid) / 2
+	} else {
+		return arr[mid]
+	}
+}
+
+function quickSelect(
+	arr: number[],
+	left: number,
+	right: number,
+	k: number,
+): number {
+	if (left === right) return arr[left]
+
+	const pivotIndex = partition(arr, left, right)
+	if (k === pivotIndex) {
+		return arr[k]
+	} else if (k < pivotIndex) {
+		return quickSelect(arr, left, pivotIndex - 1, k)
+	} else {
+		return quickSelect(arr, pivotIndex + 1, right, k)
+	}
+}
+
+function partition(arr: number[], left: number, right: number): number {
+	const pivot = arr[right]
+	let i = left
+	for (let j = left; j < right; j++) {
+		if (arr[j] < pivot) {
+			;[arr[i], arr[j]] = [arr[j], arr[i]]
+			i++
+		}
+	}
+	;[arr[i], arr[right]] = [arr[right], arr[i]]
+	return i
+}

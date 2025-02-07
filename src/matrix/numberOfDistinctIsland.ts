@@ -2,7 +2,7 @@ enum Steps {
 	UP = 'U',
 	DOWN = 'D',
 	LEFT = 'L',
-	RIGTH = 'R',
+	RIGHT = 'R',
 	WATER = 'O',
 	START = 'X',
 }
@@ -18,14 +18,7 @@ export class NumberOfDistinctIsland {
 		for (let i = 0; i < rowLenth; i++) {
 			for (let j = 0; j < colLenth; j++) {
 				if (grid[i][j] == 1) {
-					const path: string = this.computePath(
-						grid,
-						i,
-						j,
-						rowLenth,
-						colLenth,
-						// Steps.START,
-					)
+					const path: string = this.computePath(grid, i, j, rowLenth, colLenth)
 					set.add(path)
 				}
 			}
@@ -51,42 +44,21 @@ export class NumberOfDistinctIsland {
 		) {
 			return Steps.WATER
 		}
+
+		const stepsPart: [number, number, Steps][] = [
+			[0, -1, Steps.LEFT],
+			[-1, 0, Steps.UP],
+			[0, 1, Steps.RIGHT],
+			[1, 0, Steps.DOWN],
+		]
 		grid[positionI][positionJ] = 0
-		const left: string = this.computePath(
-			grid,
-			positionI,
-			positionJ - 1,
-			rowLenth,
-			colLenth,
-			Steps.LEFT,
-		)
 
-		const up: string = this.computePath(
-			grid,
-			positionI - 1,
-			positionJ,
-			rowLenth,
-			colLenth,
-			Steps.UP,
-		)
+		let path: string = direction
 
-		const rigth: string = this.computePath(
-			grid,
-			positionI,
-			positionJ + 1,
-			rowLenth,
-			colLenth,
-			Steps.RIGTH,
-		)
+		for (const [i, j, Idirection] of stepsPart) {
+			path += this.computePath(grid, i, j, rowLenth, colLenth, Idirection)
+		}
 
-		const down: string = this.computePath(
-			grid,
-			positionI + 1,
-			positionJ,
-			rowLenth,
-			colLenth,
-			Steps.LEFT,
-		)
-		return direction + left + rigth + up + down
+		return path
 	}
 }

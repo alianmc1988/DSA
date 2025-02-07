@@ -2,20 +2,20 @@ const longestSubNoRepeating = (str: string): number => {
 	const indexMap: Map<string, number> = new Map()
 	let maxCounter = 0
 
-	let tail = 0
-	let head = tail
+	let start = 0
+	let end = 0
 
-	while (head < str.length) {
-		const indexOfElement = indexMap.get(str[head])
+	while (end < str.length) {
+		const indexOfElement = indexMap.get(str[end])
 		if (indexOfElement !== undefined) {
-			const diff = head - tail
+			const diff = end - start
 			maxCounter = Math.max(maxCounter, diff)
-			tail = Math.max(indexOfElement + 1, tail)
+			start = Math.max(indexOfElement + 1, start)
 		}
-		indexMap.set(str[head], head)
-		head++
+		indexMap.set(str[end], end)
+		end++
 	}
-	maxCounter = Math.max(maxCounter, head - tail)
+	maxCounter = Math.max(maxCounter, end - start)
 
 	return maxCounter
 }
